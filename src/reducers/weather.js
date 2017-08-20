@@ -16,7 +16,7 @@ export default function(state = INITIAL_STATE, action) {
         {merger: mergers.concatArrayMerger, deep: true});
     }
     case SET_WEATHER: {
-      const { id, temp, pressure, humidity } = action.payload;
+      const { id, name, temp, pressure, humidity } = action.payload;
       return Immutable.merge(state,
         {[id]: { name, temp, pressure, humidity }, keys: [id]},
         {merger: mergers.concatArrayMerger, deep: true});
