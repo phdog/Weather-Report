@@ -5,7 +5,7 @@ import {
   SET_WEATHER
 } from '../constants/actions';
 
-const INITIAL_STATE = Immutable({ local: {}, keys: []});
+const INITIAL_STATE = Immutable({ local: {}, keys: [], values: {} });
 
 export default function(state = INITIAL_STATE, action) {
   switch(action.type) {

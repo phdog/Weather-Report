@@ -7,7 +7,7 @@ import config from '../constants/config';
 function* getLocalWeather(request) {
   const { API_URL, API_KEY } = config;
   const { latitude, longitude } = request.payload;
-  const requestURL = `${API_URL}?lat=${latitude}&lon=${longitude}&appid=${API_KEY}`;
+  const requestURL = `${API_URL}?lat=${latitude}&lon=${longitude}&lang=ru&units=metric&appid=${API_KEY}`;
   const options = { headers: { 'Content-Type': 'application/json' } };
   try {
     yield put({type: action.REQUEST_SENT});
