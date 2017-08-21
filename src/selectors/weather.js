@@ -1,15 +1,11 @@
 import { createSelector } from 'reselect';
 import { getActiveID } from './ui';
 
+// Все ключи; Стор отображение того, что сохраняется локально в браузере
 export const getKeys = (state) => state.weather.keys;
 
+// Вся погода
 const getWeather = (state) => state.weather;
-
-/*
-export const selectCityById = (state) => {
-
-};
-*/
 
 // Вернуть данные активного города
 export const selectActiveCity = createSelector(getWeather, getActiveID, (weather, id) => {

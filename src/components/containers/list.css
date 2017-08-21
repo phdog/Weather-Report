@@ -17,6 +17,18 @@
   }
 }
 
+.menu__active {
+  position: relative;
+  color: black;
+
+   &__temp {
+     color: black;
+     position: absolute;
+     top: 0;
+     right: 10px;
+   }
+}
+
 .list li {
   display: block;
   padding: 12px;
@@ -25,7 +37,7 @@
   cursor: pointer;
 }
 
-.list li:hover, .menu__active {
+.list li:hover {
   background-color: lightgrey;
   color: white;
 }

@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 
 import { setActiveCity } from '../../actions';
-import { selectCityList } from '../../selectors';
+import { selectCityList, getActiveID } from '../../selectors';
 
 class List extends Component {
 
@@ -13,9 +13,9 @@ class List extends Component {
   }
 
   render() {
-    const { cityList, loading } = this.props;
+    const { cityList, activeID } = this.props;
     return (
-       !loading && <div className="list">
+       cityList.length >0 && <div className="list">
         <ul>
           {
             cityList.map(city => {
@@ -25,9 +25,11 @@ class List extends Component {
                   key={city.id}
                   onClick={() => {this.handleClick(city.id)}}
                   >
-                  <div className='list--item'>
+                  <div className={activeID === city.id ? 'menu__active' : 'list--item' }>
                     {city.name}
-                    <span className='list--item__temp'>{city.temp} &#8451;</span>
+                    <span className={activeID === city.id ? 'menu__active__temp' : 'list--item__temp' }>
+                      {city.temp} &#8451;
+                    </span>
                   </div>
                 </li>
               )
@@ -41,7 +43,7 @@ class List extends Component {
 
 const mapStateToProps = (state) => ({
   cityList: selectCityList(state),
-  loading: state.ui.loading
+  activeID: getActiveID(state)
 })
 
 const mapDispatchToProps = (dispatch) => ({

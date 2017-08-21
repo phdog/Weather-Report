@@ -8,6 +8,7 @@ export const SEARCH_CITY = 'search_city'; //Search new city and add to Main View
 export const ADD_CITY = 'add_city'; //Add new city to localStorage
 export const REMOVE_CITY = 'remove_city'; //Remove city from localStorage
 export const UPDATE_LIST = 'update_list'; //Update Key values with new cityList
+export const REPLACE_LIST = 'replace_list'; //Replace Key values with new cityList
 
 export const SET_ACTIVE_ID = 'set_active_id'; //sets active city to display on main screen
 export const REQUEST_SENT = 'request_sent'; //sent a request to API server

@@ -2,7 +2,7 @@ import { store } from '../redux';
 import * as action from '../constants/actions';
 import config from '../constants/config';
 
-const getGeoLocation = () => {
+const windUp = () => {
   let stored = localStorage.getItem(config.CITIES);
   let record = JSON.parse(stored)
 // If Stored Cities exist, fetch data from API
@@ -27,4 +27,4 @@ const getGeoLocation = () => {
   }
 }
 
-export { getGeoLocation };
+export { windUp };
