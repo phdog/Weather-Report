@@ -25,6 +25,7 @@ class Search extends Component {
     const { loading } = this.props;
     const placeholder = loading ? 'Загружаю...' : 'Введите название города';
     return (
+      <div className='search'>
       <form
         onSubmit={this.handleSubmit}
         >
@@ -36,6 +37,7 @@ class Search extends Component {
           disabled={loading}
         />
       </form>
+    </div>
     );
   }
 

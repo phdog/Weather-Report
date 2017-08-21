@@ -1,0 +1,35 @@
+.list {
+  background-color: white;
+  width: 100%;
+  margin-top: 10px;
+  border-radius: 4px;
+  border: 2px solid transparent;
+  box-sizing: border-box;
+
+  &--item {
+    position: relative;
+
+    &__temp {
+      position: absolute;
+      top: 0;
+      right: 10px;
+    }
+  }
+}
+
+.list li {
+  display: block;
+  padding: 12px;
+  text-decoration: none;
+  color: grey;
+  cursor: pointer;
+}
+
+.list li:hover, .menu__active {
+  background-color: lightgrey;
+  color: white;
+}
+
+.list a {
+  text-decoration: none;
+}

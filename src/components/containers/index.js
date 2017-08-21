@@ -1,18 +1,24 @@
 import './index.css';
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
+import { addCity, removeCity } from '../../actions';
 import { selectActiveCity, getActiveID } from '../../selectors';
 
 import Search from './search';
 import MainScreen from '../main-screen';
+import List from './list';
 
 class Body extends Component {
 
+
+
   render() {
-    const { activeCity, loading, id } = this.props;
+    const { activeCity, loading, id, addCity, removeCity } = this.props;
     return (
       <div className='body'>
         <MainScreen
+          addCity={addCity}
+          removeCity={removeCity}
           name={activeCity.name}
           temp={activeCity.temp}
           pressure={activeCity.pressure}
@@ -21,6 +27,7 @@ class Body extends Component {
           id={id}
         />
         <Search />
+        <List />
       </div>
     );
   }
@@ -32,4 +39,9 @@ const mapStateToProps = (state) => ({
   id: getActiveID(state)
 })
 
-export default connect(mapStateToProps)(Body);
+const mapDispatchToProps = (dispatch) => ({
+  addCity: (id) => {dispatch(addCity(id))},
+  removeCity: (id) => {dispatch(removeCity(id))}
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Body);

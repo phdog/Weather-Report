@@ -16,24 +16,24 @@ function* searchCity(obj) {
     const response = yield call(axios.get, requestURL, options);
     if (response.status === 200) {
       const { id, name } = response.data;
-      const { temp, pressure, humidity } = response.data.main
+      let { temp, pressure, humidity } = response.data.main
+      temp = Math.round(temp);
+      pressure = Math.round(pressure);
+      humidity = Math.round(humidity);
 
-// Проверка на дубли
-      const keys = yield select(getKeys);
-      if (!keys.includes(id)) {
-        yield put({
-          type: action.SET_WEATHER,
-          payload: { id, name, temp, pressure, humidity }
-        });
-        yield put({
-          type: action.SET_ACTIVE_ID,
-          payload: id
-        });
-        yield put({
+    yield put({
+      type: action.SET_WEATHER,
+      payload: { id, name, temp, pressure, humidity }
+    });
+    yield put({
+      type: action.SET_ACTIVE_ID,
+      payload: id
+    });
+      /*  yield put({
           type: action.ADD_CITY,
           payload: id
         })
-      }
+      */
 
       yield put({type: action.RESPONSE_SUCCESS});
 
@@ -49,40 +49,74 @@ function* searchCity(obj) {
   }
 }
 
-// Добавить город в локальное хранилище
+// Добавить город в локальное хранилище и отобразить в списке
 function* addCity(obj) {
+  console.log('ADD CITY')
   const { CITIES } = config;
   const id = obj.payload;
-
-  let stored = localStorage.getItem(CITIES);
-  if (!stored) {
-    let record = new Array;
-    record.push(id);
-    record = JSON.stringify(record);
-    localStorage.setItem(CITIES, record);
-  } else {
-    let record = JSON.parse(stored)
-    record.push(id);
-    record = JSON.stringify(record);
-    localStorage.setItem(CITIES, record);
-  }
+  try {
+    let stored = localStorage.getItem(CITIES);
+    if (!stored) {
+      let record = new Array;
+      record.push(id);
+      record = JSON.stringify(record);
+      localStorage.setItem(CITIES, record);
+      yield put({
+        type: action.UPDATE_LIST,
+        payload: id
+      });
+    } else {
+      // Проверка на дубли
+      const keys = yield select(getKeys);
+        if (!keys.includes(id)) {
+          let record = JSON.parse(stored)
+          record.push(id);
+          record = JSON.stringify(record);
+          localStorage.setItem(CITIES, record);
+          yield put({
+            type: action.UPDATE_LIST,
+            payload: id
+          });
+        }
+      }
+    } catch (e) {
+      console.log(e)
+    }
 }
 
 // Удалить город из локального хранилища
 function* removeCity(obj) {
+  console.log('REMOVE CITY')
+
   const { CITIES } = config;
   const id = obj.payload;
-
-  let stored = localStorage.getItem(CITIES);
-  if (stored) {
-    let record = JSON.parse(stored);
-    let index = record.indexOf(id);
-    if (index > -1) {
-      record.splice(index, 1);
+try {
+  //let stored = localStorage.getItem(CITIES);
+  //if (stored) {
+// проверка на существование
+    const keys = yield select(getKeys);
+    if (keys.length > 0) {
+      let index = keys.indexOf(id);
+      keys.splice(index, 1);
+      console.log('keys', keys)
+      let record = JSON.stringify(keys);
+      localStorage.setItem(CITIES, record);
     }
-    record = JSON.stringify(record);
-    localStorage.setItem(CITIES, record);
-  }
+/*      if (keys.includes(id)) {
+        console.log('ID EXISTS')
+        let record = JSON.parse(stored);
+        let index = record.indexOf(id);
+        if (index > -1) {
+          record.splice(index, 1);
+        }
+        record = JSON.stringify(record);
+        localStorage.setItem(CITIES, record);
+  //    }
+} */
+} catch (e) {
+  console.log(e)
+}
+
 }
 
 export { searchCity, addCity, removeCity };
