@@ -91,17 +91,20 @@ function* removeCity(obj) {
   const { CITIES } = config;
   const id = obj.payload;
 try {
-  //let stored = localStorage.getItem(CITIES);
+  let stored = localStorage.getItem(CITIES);
+  let record = JSON.parse(stored);
+  let index = record.indexOf(id);
+    record.slice(0, index).concat(record.slice(index+1))
   //if (stored) {
 // проверка на существование
-    const keys = yield select(getKeys);
-    if (keys.length > 0) {
-      let index = keys.indexOf(id);
-      keys.splice(index, 1);
-      console.log('keys', keys)
-      let record = JSON.stringify(keys);
+    //const keys = yield select(getKeys);
+//    if (keys.length > 0) {
+    //  let index = keys.indexOf(id);
+    //  keys.splice(index, 1);
+      console.log('keys', record)
+      record = JSON.stringify(record);
       localStorage.setItem(CITIES, record);
-    }
+  //  }
 /*      if (keys.includes(id)) {
         console.log('ID EXISTS')
         let record = JSON.parse(stored);

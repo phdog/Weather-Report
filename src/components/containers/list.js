@@ -9,23 +9,21 @@ class List extends Component {
 
   handleClick = (e) => {
     const {setActiveCity} = this.props;
-    console.log('here', e.target.getAttribute('value'))
-    setActiveCity(e.target.getAttribute('value'));
+    setActiveCity(e);
   }
 
   render() {
-    const { cityList } = this.props;
+    const { cityList, loading } = this.props;
     return (
-      <div className="list">
+       !loading && <div className="list">
         <ul>
           {
-            cityList.map((city, i) => {
-              console.log(city.id)
+            cityList.map(city => {
               return (
                 <li
                   value={city.id}
                   key={city.id}
-                  onClick={this.handleClick}
+                  onClick={() => {this.handleClick(city.id)}}
                   >
                   <div className='list--item'>
                     {city.name}
@@ -35,18 +33,15 @@ class List extends Component {
               )
             })
           }
-
         </ul>
-
-
       </div>
     );
   }
-
 }
 
 const mapStateToProps = (state) => ({
-  cityList: selectCityList(state)
+  cityList: selectCityList(state),
+  loading: state.ui.loading
 })
 
 const mapDispatchToProps = (dispatch) => ({

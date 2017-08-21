@@ -13,7 +13,6 @@ export const selectCityById = (state) => {
 
 // Вернуть данные активного города
 export const selectActiveCity = createSelector(getWeather, getActiveID, (weather, id) => {
-  console.log('SEL', id)
   return weather[id]
 })
 
