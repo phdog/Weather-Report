@@ -3,6 +3,7 @@ import * as action from '../constants/actions';
 
 const getGeoLocation = () => {
   if ('geolocation' in navigator) {
+    store.dispatch({ type: action.REQUEST_SENT });
     navigator.geolocation.getCurrentPosition(position => {
         const { latitude, longitude } = position.coords;
         store.dispatch({

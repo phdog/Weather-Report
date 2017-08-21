@@ -1,0 +1,62 @@
+.main-screen {
+  min-width: 100%;
+  min-height: 6em;
+  margin-bottom: 20px;
+
+  &--loader{
+    box-sizing: border-box;
+    min-width: 100%;
+    min-height: 100%;
+    font-size: 1.5em;
+    text-align: center;
+    line-height: 3em;
+  }
+
+  &--position {
+    min-height: 1em;
+    min-width: 50%;
+    font-size: 0.8em;
+    text-align: center;
+  }
+}
+
+.main-screen--left {
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 50%;
+  min-height: 100%;
+  padding: 1em;
+
+  &--temp {
+    font-size: 2em;
+    padding-bottom: 0.4em;
+
+    &__sign {
+      padding-left: 0.5em;
+      font-size: 0.5em;
+    }
+  }
+
+  &__name {
+    font-size: 1em;
+  }
+}
+
+.main-screen--right {
+  display: inline-block;
+  box-sizing: border-box;
+  min-width: 50%;
+  min-height: 100%;
+  padding: 1em;
+
+  &--box {
+    margin-bottom: 8px;
+
+    &__tag {
+      font-size: 0.8em;
+      margin-right: 10px;
+    }
+  }
+
+
+}

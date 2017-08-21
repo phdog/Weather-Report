@@ -26,6 +26,10 @@ function* searchCity(obj) {
           payload: { id, name, temp, pressure, humidity }
         });
         yield put({
+          type: action.SET_ACTIVE_ID,
+          payload: id
+        });
+        yield put({
           type: action.ADD_CITY,
           payload: id
         })

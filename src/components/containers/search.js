@@ -1,3 +1,4 @@
+import './search.css';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -22,20 +23,18 @@ class Search extends Component {
 
   render() {
     const { loading } = this.props;
+    const placeholder = loading ? 'Загружаю...' : 'Введите название города';
     return (
       <form
         onSubmit={this.handleSubmit}
         >
         <input
           type='text'
-          placeholder='Начните вводить название города'
+          placeholder={placeholder}
           onChange={this.handleChange}
           value={this.state.input}
           disabled={loading}
         />
-        <span>
-          <button type="submit">Поиск</button>
-        </span>
       </form>
     );
   }

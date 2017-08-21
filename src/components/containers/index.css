@@ -1,0 +1,9 @@
+.body {
+  box-sizing:border-box;
+  padding-top: 30px;
+  width: 30vw;
+  height: 50vh;
+  margin-left: auto;
+  margin-right: auto;
+  font-family: sans-serif;
+}
