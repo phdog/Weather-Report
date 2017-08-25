@@ -31,7 +31,7 @@ export default class ReduxWare extends Component {
   render() {
     return (
     <Provider store={store}>
-      <Router history={history} key={Math.random()}>
+      <Router history={history}>
         {this.props.routes}
       </Router>
     </Provider>

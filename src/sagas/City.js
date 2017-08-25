@@ -64,12 +64,13 @@ function* addCity(obj) {
           record.push(id);
           record = JSON.stringify(record);
           localStorage.setItem(CITIES, record);
+          yield put({
+            type: action.UPDATE_LIST,
+            payload: id
+          });
         }
       }
-      yield put({
-        type: action.UPDATE_LIST,
-        payload: id
-      });
+
     } catch (e) {
       console.log(e)
     }
